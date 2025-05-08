@@ -49,43 +49,31 @@ export default function ContactFAQ() {
 
     return (
         <div className="bg-gradient-to-b from-white to-blue-50">
-            <motion.div 
-                className="container mx-auto px-4 py-16"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-            >
+            <div className="container mx-auto px-4 py-16">
                 <div className="text-center mb-12">
-                    <motion.h2 
-                        className="text-4xl font-bold text-gray-800 mb-4"
-                        initial={{ y: 20, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
                     >
-                        Common Questions About SolarCoin
-                    </motion.h2>
-                    <motion.p 
-                        className="text-gray-600 max-w-2xl mx-auto text-lg"
-                        initial={{ y: 20, opacity: 0 }}
-                        whileInView={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                    >
-                        Explore our frequently asked questions to learn more about sustainable investing with SolarCoin
-                    </motion.p>
+                        <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                            Common Questions About SolarCoin
+                        </h2>
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+                            Explore our frequently asked questions to learn more about sustainable investing with SolarCoin
+                        </p>
+                    </motion.div>
                 </div>
 
                 <div className="max-w-3xl mx-auto space-y-4">
                     {faqs.map((faq, index) => (
-                        <motion.div 
+                        <div 
                             key={index} 
-                            className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-200"
                         >
                             <button
                                 onClick={() => toggleFaq(index)}
-                                className="flex justify-between items-center w-full p-5 text-left focus:outline-none"
+                                className="flex justify-between items-center w-full p-5 text-left focus:outline-none hover:bg-gray-50 transition-colors duration-200"
                             >
                                 <span className="text-lg font-medium text-gray-800">
                                     {faq.question}
@@ -102,9 +90,9 @@ export default function ContactFAQ() {
                             <AnimatePresence>
                                 {faq.isOpen && (
                                     <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
+                                        initial={{ height: 0 }}
+                                        animate={{ height: "auto" }}
+                                        exit={{ height: 0 }}
                                         transition={{ duration: 0.2 }}
                                     >
                                         <div className="p-5 bg-blue-50 border-t border-gray-100">
@@ -115,27 +103,19 @@ export default function ContactFAQ() {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
 
-                <motion.div 
-                    className="text-center mt-12"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.5 }}
-                >
-                    <p className="text-gray-600 text-lg">
-                        Still have questions? {" "}
-                        <a
-                            href="#contact-form"
-                            className="text-blue-600 hover:text-blue-800 font-medium underline decoration-2 decoration-blue-200 hover:decoration-blue-600 transition-all"
-                        >
-                            Reach out to our team
-                        </a>
-                    </p>
-                </motion.div>
-            </motion.div>
+                <div className="text-center mt-12">
+                    <a
+                        href="#contact-form"
+                        className="text-blue-600 hover:text-blue-800 font-medium underline decoration-2 decoration-blue-200 hover:decoration-blue-600 transition-all duration-200"
+                    >
+                        Still have questions? Reach out to our team
+                    </a>
+                </div>
+            </div>
         </div>
     );
 }

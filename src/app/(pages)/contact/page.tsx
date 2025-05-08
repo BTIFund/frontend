@@ -17,7 +17,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="bg-gray-50 min-h-screen text-gray-900">
+    <main className="bg-gray-100 min-h-screen text-gray-900">
       <Head>
         <title>Contact Us | SolarCoin</title>
         <meta
@@ -26,26 +26,15 @@ export default function Contact() {
         />
       </Head>
 
-      <motion.div
-        initial="initial"
-        animate="animate"
-        variants={fadeIn}
-      >
-        <ContactHero />
-      </motion.div>
+      <ContactHero />
 
       <div className="container mx-auto px-4 py-16">
-        <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <ContactInfo />
           <div className="lg:col-span-2">
             <ContactForm />
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <motion.div
