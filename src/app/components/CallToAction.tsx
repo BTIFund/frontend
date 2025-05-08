@@ -11,15 +11,9 @@ export default function CallToActionSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <motion.h2 
-            className="text-4xl font-bold mb-6 text-blue-900"
-            whileInView={{ 
-              scale: [0.9, 1.05, 1],
-              transition: { duration: 0.6 }
-            }}
-          >
+          <h2 className="text-4xl font-bold mb-6 text-blue-900">
             Transform Your Portfolio, Transform Our Planet
-          </motion.h2>
+          </h2>
           
           <motion.p 
             className="text-xl mb-8 max-w-3xl mx-auto text-blue-900"
@@ -39,7 +33,7 @@ export default function CallToActionSection() {
             <motion.a
               href="#dapp"
               className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-md transition duration-300 flex items-center justify-center"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
             >
               Launch Investment Platform
@@ -49,7 +43,7 @@ export default function CallToActionSection() {
             <motion.a
               href="#contact"
               className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-8 py-4 rounded-md transition duration-300"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
             >
               Schedule a Consultation

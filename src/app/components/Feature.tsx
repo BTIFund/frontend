@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BarChart3, Globe, Leaf, Shield, Wallet, Zap } from "lucide-react";
 
@@ -112,12 +112,7 @@ export default function FeatureSection() {
                             showing exact CO₂ reduction metrics and renewable energy generation.
                         </p>
                     </motion.div>
-                </motion.div>
 
-                <motion.div 
-                    className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-                    variants={staggerChildren}
-                >
                     <motion.div 
                         className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-xl transition duration-300"
                         variants={fadeIn}

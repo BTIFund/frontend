@@ -194,7 +194,7 @@ export default function ProjectsSection() {
                                     layout="fill"
                                     objectFit="cover"
                                     alt={project.title}
-                                    className="transition-transform duration-700 hover:scale-110"
+                                    // className="transition-transform duration-700 hover:scale-110"
                                 />
                                 <div className={`absolute top-4 right-4 ${project.badge.color} text-black text-sm font-semibold px-3 py-1 rounded-full shadow-md`}>
                                     {project.badge.text}
@@ -313,7 +313,7 @@ export default function ProjectsSection() {
                     <motion.a
                         href="#all-projects"
                         className="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-lg transition duration-300 shadow-lg"
-                        whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+                        whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
                         whileTap={{ scale: 0.98 }}
                     >
                         Explore Our Full Project Portfolio <ArrowRight size={18} className="ml-2" />
