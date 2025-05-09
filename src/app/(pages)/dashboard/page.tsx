@@ -4,29 +4,13 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Sun,
   Zap,
-  Wallet,
-  Users,
-  ChevronDown,
-  Clock,
-  Leaf,
-  CheckCircle,
-  Home,
-  BarChart2,
-  Settings,
-  PlusCircle,
-  LogOut,
+  // ChevronDown,
   Search,
-  AlertCircle,
   HelpCircle,
-  ArrowUpRight,
   ChevronRight,
   Percent,
   MapPin,
-  Calendar,
-  Activity,
-  DollarSign,
 } from "lucide-react";
 import BTILogo from "../../../../public/img/bti-logo.png";
 import BTIProject1 from "../../../../public/img/bti-project-1.webp";
@@ -35,7 +19,7 @@ import BTIProject3 from "../../../../public/img/bti-project-3.webp";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview");
-  const [investorView, setInvestorView] = useState(true);
+  const [investorView] = useState(true);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
 
   // Sample data for the dashboard
@@ -127,58 +111,6 @@ export default function Dashboard() {
       amount: "14.22",
       date: "March 30, 2025",
       status: "Completed",
-    },
-  ];
-
-  // Developer sample data
-  const developerProjects = [
-    {
-      id: 1,
-      name: "Bandung School Campus",
-      location: "Bandung, West Java",
-      image: BTIProject2,
-      capacity: "175 kWp",
-      fundingGoal: "175,000",
-      fundingRaised: "87,500",
-      returns: "9.5%",
-      deadline: "June 30, 2025",
-      status: "Funding",
-    },
-    {
-      id: 2,
-      name: "Yogyakarta Shopping Mall",
-      location: "Yogyakarta, Java",
-      image: BTIProject3,
-      capacity: "400 kWp",
-      fundingGoal: "400,000",
-      fundingRaised: "400,000",
-      returns: "11%",
-      deadline: "N/A",
-      status: "Active",
-    },
-  ];
-
-  const developerStats = {
-    totalRaised: "487,500",
-    activeProjects: 2,
-    totalCapacity: "575",
-    totalInvestors: 167,
-  };
-
-  const monthlyDistributions = [
-    {
-      id: 1,
-      project: "Yogyakarta Shopping Mall",
-      amount: "3,666.67",
-      date: "April 30, 2025",
-      status: "Distributed",
-    },
-    {
-      id: 2,
-      project: "Yogyakarta Shopping Mall",
-      amount: "3,666.67",
-      date: "March 30, 2025",
-      status: "Distributed",
     },
   ];
 
@@ -354,11 +286,10 @@ export default function Dashboard() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          project.status === "Active"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-yellow-100 text-yellow-800"
-                        }`}
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${project.status === "Active"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-yellow-100 text-yellow-800"
+                          }`}
                       >
                         {project.status}
                       </span>
@@ -419,11 +350,10 @@ export default function Dashboard() {
                   <tr key={tx.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
-                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          tx.type === "Investment"
-                            ? "bg-blue-100 text-blue-800"
-                            : "bg-green-100 text-green-800"
-                        }`}
+                        className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${tx.type === "Investment"
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-green-100 text-green-800"
+                          }`}
                       >
                         {tx.type}
                       </span>
@@ -495,11 +425,10 @@ export default function Dashboard() {
                   alt={project.name}
                 />
                 <div
-                  className={`absolute top-4 right-4 text-sm font-semibold px-2 py-1 rounded ${
-                    project.status === "Active"
-                      ? "bg-green-500 text-white"
-                      : "bg-yellow-500 text-black"
-                  }`}
+                  className={`absolute top-4 right-4 text-sm font-semibold px-2 py-1 rounded ${project.status === "Active"
+                    ? "bg-green-500 text-white"
+                    : "bg-yellow-500 text-black"
+                    }`}
                 >
                   {project.status}
                 </div>
@@ -627,11 +556,10 @@ export default function Dashboard() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span
-                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        tx.type === "Investment"
-                          ? "bg-blue-100 text-blue-800"
-                          : "bg-green-100 text-green-800"
-                      }`}
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${tx.type === "Investment"
+                        ? "bg-blue-100 text-blue-800"
+                        : "bg-green-100 text-green-800"
+                        }`}
                     >
                       {tx.type}
                     </span>
@@ -668,7 +596,7 @@ export default function Dashboard() {
           <Image src={BTILogo} alt="BTI Logo" width={40} height={40} />
           <h1 className="text-2xl font-bold">Dashboard</h1>
         </div>
-        <button
+        {/* <button
           onClick={() => setShowAccountMenu(!showAccountMenu)}
           className="flex items-center space-x-2 text-gray-700"
         >
@@ -681,7 +609,7 @@ export default function Dashboard() {
           />
           <span>Account</span>
           <ChevronDown size={16} />
-        </button>
+        </button> */}
       </div>
 
       {/* Account Menu */}
@@ -720,9 +648,8 @@ export default function Dashboard() {
       <div className="mt-6 flex space-x-4 border-b border-gray-200 text-white">
         <button
           onClick={() => setActiveTab("overview")}
-          className={`pb-2 font-semibold ${
-            activeTab === "overview" ? "border-b-2 border-blue-900" : ""
-          }`}
+          className={`pb-2 font-semibold ${activeTab === "overview" ? "border-b-2 border-blue-900" : ""
+            }`}
         >
           Overview
         </button>
@@ -736,9 +663,8 @@ export default function Dashboard() {
         </button>
         <button
           onClick={() => setActiveTab("transactions")}
-          className={`pb-2 font-semibold ${
-            activeTab === "transactions" ? "border-b-2 border-blue-900" : ""
-          }`}
+          className={`pb-2 font-semibold ${activeTab === "transactions" ? "border-b-2 border-blue-900" : ""
+            }`}
         >
           Transactions
         </button>

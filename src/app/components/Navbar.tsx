@@ -16,13 +16,15 @@ const Navbar = () => {
               className="h-10 w-auto"
             />
           </Link>
+        </div>
+        <div className="flex items-center space-x-4">
           <div className="hidden md:flex space-x-4 ml-8">
             <Link href="/" className="px-3 py-2 hover:text-yellow-400">
               Home
             </Link>
-            <Link href="/dashboard" className="px-3 py-2 hover:text-yellow-400">
+            {/* <Link href="/dashboard" className="px-3 py-2 hover:text-yellow-400">
               Dashboard
-            </Link>
+            </Link> */}
             <Link
               href="/documentation"
               className="px-3 py-2 hover:text-yellow-400"
@@ -33,10 +35,8 @@ const Navbar = () => {
               Contact
             </Link>
           </div>
-        </div>
-        <div className="flex items-center space-x-4">
           <a
-            href="#dapp"
+            href="/dashboard"
             className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-md transition duration-300"
           >
             Launch App

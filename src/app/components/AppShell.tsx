@@ -1,13 +1,19 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 const AppShell = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+  const isDashboardRoute = pathname.startsWith("/dashboard");
+
   return (
     <main>
-      <Navbar />
-      <div className="pt-10">{/* Space for the fixed navbar */}</div>
-      {/* Main content area */}
-      {children}
+      {!isDashboardRoute && <Navbar />}
+      <div className={!isDashboardRoute ? "pt-10" : ""}>
+        {children}
+      </div>
       <Footer />
     </main>
   );
