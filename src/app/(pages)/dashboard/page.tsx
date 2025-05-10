@@ -37,7 +37,7 @@ export default function Dashboard() {
 
   return (
     <div className="bg-gray-100 container mx-auto p-6 text-gray-900">
-      <DashboardHeader />
+      {/* <DashboardHeader /> */}
       <DashboardTabs activeTab={activeTab} onTabChange={setActiveTab} />
       <div className="mt-6">{renderTabContent()}</div>
     </div>
