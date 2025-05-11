@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Search, MapPin, Zap, Percent, HelpCircle } from "lucide-react";
 import { Project } from "../types/project.types";
+import CreateProjectModal from "./CreateProjectModal";
 
 interface ProjectsViewProps {
   projects: Project[];
@@ -12,6 +13,7 @@ interface ProjectsViewProps {
 export default function ProjectsView({ projects }: ProjectsViewProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const filteredProjects = projects.filter((project) => {
     const matchesSearch = project.name
@@ -29,7 +31,7 @@ export default function ProjectsView({ projects }: ProjectsViewProps) {
       {/* Header and Filters */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-900">Solar Projects</h2>
-        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        {/* <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <div className="relative">
             <input
               type="text"
@@ -50,7 +52,30 @@ export default function ProjectsView({ projects }: ProjectsViewProps) {
             <option value="active">Active</option>
             <option value="funding">Funding</option>
           </select>
-        </div>
+        </div> */}
+        <button 
+          className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          onClick={() => setIsCreateModalOpen(true)}
+        >
+          <svg 
+            className="w-5 h-5 mr-2" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M12 4v16m8-8H4" 
+            />
+          </svg>
+          Create Project
+        </button>
+        <CreateProjectModal
+          isOpen={isCreateModalOpen}
+          onClose={() => setIsCreateModalOpen(false)}
+        />
       </div>
 
       {/* Projects Grid */}
