@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Search, MapPin, Zap, Percent, HelpCircle } from "lucide-react";
+import { MapPin, Zap, Percent, HelpCircle } from "lucide-react";
 import { Project } from "../types/project.types";
 import CreateProjectModal from "./CreateProjectModal";
 
@@ -11,8 +11,8 @@ interface ProjectsViewProps {
 }
 
 export default function ProjectsView({ projects }: ProjectsViewProps) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filter, setFilter] = useState("all");
+  const [searchTerm ] = useState("");
+  const [filter ] = useState("all");
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const filteredProjects = projects.filter((project) => {

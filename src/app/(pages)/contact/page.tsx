@@ -1,6 +1,6 @@
 "use client";
 
-import Head from "next/head";
+// import Head from "next/head";
 import { motion } from "framer-motion";
 import ContactCallToAction from "@/app/components/Contact-CallToAction";
 import ContactFAQ from "@/app/components/Contact-FAQ";

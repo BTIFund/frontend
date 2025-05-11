@@ -12,7 +12,7 @@ interface CreateProjectModalProps {
 }
 
 export default function CreateProjectModal({ isOpen, onClose }: CreateProjectModalProps) {
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
     const { address } = useAccount();
     const [formData, setFormData] = useState({
         name: "",
@@ -138,10 +138,11 @@ export default function CreateProjectModal({ isOpen, onClose }: CreateProjectMod
 
           <button
             type="submit"
-            disabled={isLoading}
+            // disabled={isLoading}
             className="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? "Creating Project..." : "Create Project"}
+            {/* {isLoading ? "Creating Project..." : "Create Project"} */}
+            Create Project
           </button>
         </form>
       </div>
