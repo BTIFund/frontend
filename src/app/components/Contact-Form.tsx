@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface ContactFormData {
@@ -41,7 +41,7 @@ export default function ContactForm() {
                 message: "Thank you for your message. We'll get back to you soon!",
             });
             setFormData({ name: "", email: "", subject: "", message: "" });
-        } catch (error) {
+        } catch {
             setSubmitStatus({
                 success: false,
                 message: "There was an error sending your message. Please try again.",
@@ -58,7 +58,7 @@ export default function ContactForm() {
     };
 
     return (
-        <motion.div 
+        <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="lg:col-span-2"
@@ -70,10 +70,10 @@ export default function ContactForm() {
                     transition={{ duration: 0.5 }}
                 >
                     <h2 className="text-3xl font-bold text-gray-800 mb-2">
-                        Let's Connect
+                        Let&39;s Connect
                     </h2>
                     <p className="text-gray-600 mb-8">
-                        Fill out the form below and we'll get back to you shortly.
+                        Fill out the form below and we&39;ll get back to you shortly.
                     </p>
                 </motion.div>
 
@@ -81,18 +81,17 @@ export default function ContactForm() {
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className={`p-4 rounded-lg mb-6 ${
-                            submitStatus.success
+                        className={`p-4 rounded-lg mb-6 ${submitStatus.success
                                 ? "bg-green-50 text-green-700 border border-green-200"
                                 : "bg-red-50 text-red-700 border border-red-200"
-                        }`}
+                            }`}
                     >
                         {submitStatus.message}
                     </motion.div>
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    <motion.div 
+                    <motion.div
                         className="grid grid-cols-1 md:grid-cols-2 gap-6"
                         variants={formControls}
                         initial="initial"
@@ -129,7 +128,7 @@ export default function ContactForm() {
                         </div>
                     </motion.div>
 
-                    <motion.div 
+                    <motion.div
                         className="space-y-2"
                         variants={formControls}
                         initial="initial"
@@ -154,7 +153,7 @@ export default function ContactForm() {
                         </select>
                     </motion.div>
 
-                    <motion.div 
+                    <motion.div
                         className="space-y-2"
                         variants={formControls}
                         initial="initial"
@@ -175,7 +174,7 @@ export default function ContactForm() {
                         ></textarea>
                     </motion.div>
 
-                    <motion.div 
+                    <motion.div
                         className="flex justify-end"
                         variants={formControls}
                         initial="initial"

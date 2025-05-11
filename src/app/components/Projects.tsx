@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Zap, Clock, CheckCircle, ArrowRight, Award, Thermometer, BarChart3, Users, Sun } from 'lucide-react';
+import { Zap, CheckCircle, ArrowRight, Award, BarChart3, Sun } from 'lucide-react';
 import BTIProject1 from "../../../public/img/bti-project-1.webp";
 import BTIProject2 from "../../../public/img/bti-project-2.webp";
 import BTIProject3 from "../../../public/img/bti-project-3.webp";
@@ -181,7 +181,7 @@ export default function ProjectsSection() {
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
                 >
-                    {filteredProjects.map((project, index) => (
+                    {filteredProjects.map((project) => (
                         <motion.div 
                             key={project.id}
                             className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"

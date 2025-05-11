@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { mockProjects, projects, mockTransactions, mockStats } from "./mockData";
+import { mockProjects, mockTransactions, mockStats } from "./mockData";
 
 export function useProjectData() {
-  const [data, setData] = useState({
+  const [data] = useState({
     stats: mockStats,
     projects: mockProjects,
     transactions: mockTransactions,

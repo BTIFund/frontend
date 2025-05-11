@@ -80,7 +80,7 @@ export default function AboutSection() {
                             className="mb-8 text-lg"
                             variants={itemVariants}
                         >
-                            We're accelerating the global shift to sustainable energy by directly connecting investors with high-potential solar projects. This creates a powerful ecosystem where financial returns and environmental impact coexist harmoniously.
+                            We&#39;re accelerating the global shift to sustainable energy by directly connecting investors with high-potential solar projects. This creates a powerful ecosystem where financial returns and environmental impact coexist harmoniously.
                         </motion.p>
                         
                         <motion.div 

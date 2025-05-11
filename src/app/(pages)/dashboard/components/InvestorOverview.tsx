@@ -1,27 +1,4 @@
-// import { motion } from "framer-motion";
-// import { PortfolioStats } from "../types/portofolio-stats.types";
-// import { Project } from "../types/project.types";
-// import { Transaction } from "../types/transaction.types";
-// import StatsGrid from "../components/StatsGrid";
-// import ProjectsTable from "./ProjectsTable";
-// import TransactionsTable from "./TransactionsTable";
-
-// interface Props {
-//   stats: PortfolioStats;
-//   projects: Project[];
-//   transactions: Transaction[];
-// }
-
-// export default function InvestorOverview({ stats, projects, transactions }: Props) {
-//   return (
-//     <div className="space-y-8">
-//       <StatsGrid stats={stats} />
-//       <ProjectsTable projects={projects} />
-//       <TransactionsTable transactions={transactions.slice(0, 3)} />
-//     </div>
-//   );
-// }
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChevronRight } from "lucide-react";
 import StatsGrid from "./StatsGrid";
 import PerformanceChart from "./PerformanceChart";
@@ -38,7 +15,6 @@ export default function InvestorOverview({ stats, projects, transactions }: Inve
   return (
     <div className="space-y-8">
       <StatsGrid stats={stats} />
-      
       <div className="bg-white rounded-lg shadow-sm">
         <div className="p-6">
           <h2 className="text-lg font-semibold mb-4">Portfolio Performance</h2>
