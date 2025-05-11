@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import DashboardHeader from "./components/DashboardHeader";
+// import DashboardHeader from "./components/DashboardHeader";
 import DashboardTabs from "./components/DashboardTabs";
 import InvestorOverview from "./components/InvestorOverview";
 import ProjectsView from "./components/ProjectsView";
