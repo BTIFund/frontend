@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import BTILogo from "../../../public/img/bti-logo.png";
+import { ConnectButton } from "@xellar/kit";
 
 const Navbar = () => {
   return (
@@ -35,12 +36,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <a
-            href="#dapp"
-            className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded-md transition duration-300"
-          >
-            Launch App
-          </a>
+          <ConnectButton />
         </div>
       </div>
     </header>
