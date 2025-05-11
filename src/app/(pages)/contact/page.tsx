@@ -13,13 +13,13 @@ export default function Contact() {
 
   return (
     <main className="bg-gray-100 min-h-screen text-gray-900">
-      <Head>
+      {/* <Head>
         <title>Contact Us | SolarCoin</title>
         <meta
           name="description"
           content="Get in touch with the SolarCoin team for any questions about solar energy investment or blockchain technology."
         />
-      </Head>
+      </Head> */}
 
       <ContactHero />
 
