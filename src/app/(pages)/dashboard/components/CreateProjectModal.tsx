@@ -12,38 +12,42 @@ interface CreateProjectModalProps {
 }
 
 export default function CreateProjectModal({ isOpen, onClose }: CreateProjectModalProps) {
-    // const [isLoading, setIsLoading] = useState(false);
-    const { address } = useAccount();
-    const [formData, setFormData] = useState({
-        name: "",
-        location: "",
-        fundingGoal: "",
-        expectedMonthlyReturn: "",
-        fundingDurationDays: "",
-    });
+  const [isLoading, setIsLoading] = useState(false);
+  const { address } = useAccount();
+  const [formData, setFormData] = useState({
+    name: "",
+    location: "",
+    fundingGoal: "",
+    expectedMonthlyReturn: "",
+    fundingDurationDays: "",
+  });
 
-    const { writeContract: createProject } = useWriteContract();
+  const { writeContract: createProject } = useWriteContract();
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        
-        if (!address) return;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-        createProject({
-            abi: BTIabi,
-            functionName: "createProject",
-            address: process.env.NEXT_PUBLIC_BTI_CONTRACT as `0x${string}`,
-            args: [
-                formData.name,
-                formData.location,
-                parseUnits(formData.fundingGoal, 18),
-                parseUnits(formData.expectedMonthlyReturn, 2), // Assuming percentage with 2 decimals
-                BigInt(Number(formData.fundingDurationDays)),
-            ]
-        })
-    };
+    if (!address) return;
 
-    if (!isOpen) return null;
+    setIsLoading(true);
+
+    createProject({
+      abi: BTIabi,
+      functionName: "createProject",
+      address: process.env.NEXT_PUBLIC_BTI_CONTRACT as `0x${string}`,
+      args: [
+        formData.name,
+        formData.location,
+        parseUnits(formData.fundingGoal, 18),
+        parseUnits(formData.expectedMonthlyReturn, 2), // Assuming percentage with 2 decimals
+        BigInt(Number(formData.fundingDurationDays)),
+      ]
+    })
+
+    setIsLoading(false);
+  };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-opacity">
@@ -138,11 +142,10 @@ export default function CreateProjectModal({ isOpen, onClose }: CreateProjectMod
 
           <button
             type="submit"
-            // disabled={isLoading}
-            className="w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isLoading}
+            className="cursor-pointer w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {/* {isLoading ? "Creating Project..." : "Create Project"} */}
-            Create Project
+            {isLoading ? "Creating Project..." : "Create Project"}
           </button>
         </form>
       </div>
