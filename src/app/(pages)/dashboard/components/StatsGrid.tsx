@@ -23,7 +23,7 @@ export default function StatsGrid({ stats }: Props) {
       { label: "Annual Returns", value: stats.annualReturns },
       { label: "Carbon Offset", value: stats.carbonOffset, suffix: "Tons CO₂" },
     ];
-  }, [activeProjects]);
+  }, [activeProjects, stats.annualReturns, stats.carbonOffset, stats.monthlyReturns, stats.totalInvested]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">

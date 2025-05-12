@@ -21,7 +21,7 @@ export default function CallToActionSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            Join the growing community of forward-thinking investors who are funding tomorrow' clean energy infrastructure while securing competitive financial returns today.
+            Join the growing community of forward-thinking investors who are funding tomorrow&#39; clean energy infrastructure while securing competitive financial returns today.
           </motion.p>
           
           <motion.div 
