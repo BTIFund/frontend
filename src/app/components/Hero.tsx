@@ -34,7 +34,7 @@ export default function HeroSection() {
                         transition={{ duration: 0.5, delay: 1 }}
                     >
                         <a
-                            href="#dapp"
+                            href="/dashboard"
                             className="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-6 py-3 rounded-md text-center transition duration-300 transform hover:scale-105"
                         >
                             Start Investing Now

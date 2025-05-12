@@ -73,7 +73,7 @@ export default function ContactForm() {
                         Let's Connect
                     </h2>
                     <p className="text-gray-600 mb-8">
-                        Fill out the form below and we&39;ll get back to you shortly.
+                        Fill out the form below and we'll get back to you shortly.
                     </p>
                 </motion.div>
 
