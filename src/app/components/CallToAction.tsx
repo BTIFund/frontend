@@ -21,7 +21,7 @@ export default function CallToActionSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            Join the growing community of forward-thinking investors who are funding tomorrow&#39; clean energy infrastructure while securing competitive financial returns today.
+            Join the growing community of forward-thinking investors who are funding tomorrow's clean energy infrastructure while securing competitive financial returns today.
           </motion.p>
           
           <motion.div 
@@ -31,7 +31,7 @@ export default function CallToActionSection() {
             transition={{ delay: 0.6, duration: 0.5 }}
           >
             <motion.a
-              href="#dapp"
+              href="/dashboard"
               className="bg-blue-900 hover:bg-blue-800 text-white font-semibold px-8 py-4 rounded-md transition duration-300 flex items-center justify-center"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
@@ -41,7 +41,7 @@ export default function CallToActionSection() {
             </motion.a>
             
             <motion.a
-              href="#contact"
+              href="/contact"
               className="bg-white hover:bg-gray-100 text-blue-900 font-semibold px-8 py-4 rounded-md transition duration-300"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.95 }}
