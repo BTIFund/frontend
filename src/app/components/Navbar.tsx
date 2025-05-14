@@ -18,11 +18,23 @@ const Navbar = () => {
             />
           </Link>
           <div className="hidden md:flex space-x-4 ml-8">
-            <Link href="/" className="px-3 py-2 hover:text-yellow-400">
+            <Link 
+              href="/" 
+              className="px-3 py-2 hover:text-yellow-400"
+            >
               Home
             </Link>
-            <Link href="/dashboard" className="px-3 py-2 hover:text-yellow-400">
+            <Link 
+              href="/dashboard" 
+              className="px-3 py-2 hover:text-yellow-400"
+            >
               Dashboard
+            </Link>
+            <Link 
+              href="/projects" 
+              className="px-3 py-2 hover:text-yellow-400"
+            >
+              Projects
             </Link>
             <Link
               href="/documentation"

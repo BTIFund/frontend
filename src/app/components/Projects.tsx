@@ -311,7 +311,7 @@ export default function ProjectsSection() {
                     </p>
                     
                     <motion.a
-                        href="#all-projects"
+                        href="/projects"
                         className="inline-flex items-center bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-8 py-4 rounded-lg transition duration-300 shadow-lg"
                         whileHover={{ scale: 1.02, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
                         whileTap={{ scale: 0.98 }}
