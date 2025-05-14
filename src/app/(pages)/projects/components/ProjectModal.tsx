@@ -17,7 +17,7 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
+          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
@@ -41,43 +41,43 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
                   />
                 </div>
 
-                <Dialog.Title className="text-2xl font-semibold mb-4">
+                <Dialog.Title className="text-2xl font-semibold mb-4 text-slate-800">
                   {project.title}
                 </Dialog.Title>
 
-                <div className="grid grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-2 gap-6 mb-6 text-slate-600">
                   <div className="space-y-4">
                     <div>
-                      <h4 className="text-gray-600">Location</h4>
+                      <h4 className="text-gray-900 font-semibold">Location</h4>
                       <p className="font-medium">{project.location}</p>
                     </div>
                     <div>
-                      <h4 className="text-gray-600">Category</h4>
+                      <h4 className="text-gray-900 font-semibold">Category</h4>
                       <p className="font-medium capitalize">{project.category}</p>
                     </div>
                     <div>
-                      <h4 className="text-gray-600">Capacity</h4>
+                      <h4 className="text-gray-900 font-semibold">Capacity</h4>
                       <p className="font-medium">{project.capacity}</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <h4 className="text-gray-600">Expected Return</h4>
+                      <h4 className="text-gray-900 font-semibold">Expected Return</h4>
                       <p className="font-medium text-green-600">{project.return}</p>
                     </div>
                     <div>
-                      <h4 className="text-gray-600">Impact</h4>
+                      <h4 className="text-gray-900 font-semibold">Impact</h4>
                       <p className="font-medium">{project.impact}</p>
                     </div>
                     <div>
-                      <h4 className="text-gray-600">Energy Production</h4>
+                      <h4 className="text-gray-900 font-semibold">Energy Production</h4>
                       <p className="font-medium">Powers {project.energyFor}</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-3 mb-6">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-slate-800">
                     <span>Funding Progress</span>
                     <span>{project.fundingPercent}%</span>
                   </div>
@@ -93,10 +93,24 @@ export default function ProjectModal({ isOpen, onClose, project }: any) {
                   </div>
                 </div>
 
+                <div className='space-y-2 mb-6'>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Investment Amount
+                        </label>
+                        <input
+                            type="text"
+                            className="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Enter your investment amount"
+                            required
+                        />
+                    </div>
+                </div>
+
                 <div className="flex justify-end gap-4">
                   <button
                     onClick={onClose}
-                    className="px-4 py-2 text-gray-600 hover:text-gray-800"
+                    className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
                   >
                     Close
                   </button>
