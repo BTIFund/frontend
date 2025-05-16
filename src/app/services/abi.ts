@@ -156,6 +156,19 @@ const BTIabi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "_projectId",
+        type: "uint256",
+      },
+    ],
+    name: "refundInvestment",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "token",
         type: "address",
@@ -345,19 +358,6 @@ const BTIabi = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_projectId",
-        type: "uint256",
-      },
-    ],
-    name: "refundInvestment",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
         name: "_developer",
         type: "address",
@@ -403,6 +403,71 @@ const BTIabi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "_projectId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_year",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_month",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_kWh",
+        type: "uint256",
+      },
+    ],
+    name: "setMonthlyEnergyProduction",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "user",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "projectId",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "transactionType",
+        type: "string",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "timestamp",
+        type: "uint256",
+      },
+    ],
+    name: "Transactions",
+    type: "event",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "newOwner",
         type: "address",
@@ -429,6 +494,19 @@ const BTIabi = [
   {
     inputs: [],
     name: "BASIS_POINTS",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "CARBON_OFFSET_PER_KWH",
     outputs: [
       {
         internalType: "uint256",
@@ -581,6 +659,206 @@ const BTIabi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_user",
+        type: "address",
+      },
+    ],
+    name: "getUserAnnualReturns",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_user",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_year",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_month",
+        type: "uint256",
+      },
+    ],
+    name: "getUserCarbonOffset",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_user",
+        type: "address",
+      },
+    ],
+    name: "getUserMonthlyReturns",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_user",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_year",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_month",
+        type: "uint256",
+      },
+    ],
+    name: "getUserPortfolioPerformance",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "totalInvestment",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "totalReturns",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct SolarCrowdfunding.PortfolioPerformance",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_user",
+        type: "address",
+      },
+    ],
+    name: "getUserTransactionHistory",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "projectId",
+            type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "transactionType",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "timestamp",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct SolarCrowdfunding.Transaction[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_user",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "_fromTimestamp",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_toTimestamp",
+        type: "uint256",
+      },
+    ],
+    name: "getUserTransactionHistory",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "projectId",
+            type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "transactionType",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "timestamp",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct SolarCrowdfunding.Transaction[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "idrxToken",
     outputs: [
@@ -641,6 +919,59 @@ const BTIabi = [
         internalType: "bool",
         name: "",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "monthlyEnergyProduction",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "monthlyPerformance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "totalInvestment",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "totalReturns",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
