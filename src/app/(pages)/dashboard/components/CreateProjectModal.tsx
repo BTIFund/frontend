@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useAccount, useWriteContract } from "wagmi";
 import { parseUnits } from "viem";
-import { BTIabi } from "@/app/services/abi";
+import { wagmiContractSolarConfig } from "@/app/services/contract";
 
 interface CreateProjectModalProps {
   isOpen: boolean;
@@ -22,30 +23,77 @@ export default function CreateProjectModal({ isOpen, onClose }: CreateProjectMod
     fundingDurationDays: "",
   });
 
-  const { writeContract: createProject } = useWriteContract();
+  const { writeContractAsync } = useWriteContract();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // const executeContract = async (config: any) => {
+  //   try {
+  //     await writeContractAsync(config);
+  //   } catch (error: unknown) {
+  //     console.error(error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   };
+  // }
+
+
+  // const handleSubmit = () => {
+  //   setIsLoading(true)
+  //   if (!address) {
+  //     console.warn("Address is missing");
+  //     return;
+  //   }
+
+  //   executeContract({
+  //     ...wagmiContractSolarConfig,
+  //     functionName: "createProject",
+  //     args: [
+  //       formData.name,
+  //       formData.location,
+  //       parseUnits(formData.fundingGoal, 18),
+  //       parseUnits(formData.expectedMonthlyReturn, 2),
+  //       BigInt(Number(formData.fundingDurationDays)),
+  //     ],
+  //   });
+  // };
+
+  const executeContract = async (config: any) => {
+    try {
+      console.log("[executeContract] Sending transaction with config:", config);
+      const tx = await writeContractAsync(config);
+      console.log("[executeContract] Transaction response:", tx);
+    } catch (error: unknown) {
+      console.error("[executeContract] Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!address) return;
 
     setIsLoading(true);
 
-    createProject({
-      abi: BTIabi,
+    if (!address) {
+      console.warn("[handleSubmit] Address is missing");
+      setIsLoading(false);
+      return;
+    }
+
+    console.log("[handleSubmit] Submitting project with formData:", formData);
+
+    await executeContract({
+      ...wagmiContractSolarConfig,
       functionName: "createProject",
-      address: process.env.NEXT_PUBLIC_BTI_CONTRACT as `0x${string}`,
       args: [
         formData.name,
         formData.location,
         parseUnits(formData.fundingGoal, 18),
-        parseUnits(formData.expectedMonthlyReturn, 2), // Assuming percentage with 2 decimals
+        parseUnits(formData.expectedMonthlyReturn, 2),
         BigInt(Number(formData.fundingDurationDays)),
-      ]
-    })
-
-    setIsLoading(false);
+      ],
+    });
   };
+
 
   if (!isOpen) return null;
 

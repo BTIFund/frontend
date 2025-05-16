@@ -98,7 +98,7 @@ export default function ProjectsView() {
       {(isProjectIdsLoading || isFetchingDetails) ? (
         <div className="text-center text-lg">Loading projects...</div>
       ) : projectDetails.length === 0 ? (
-        <div className="p-6 text-center text-gray-500">No projects found.</div>
+        <div className="p-11 text-center text-gray-500">No projects found.</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projectDetails.map((project, index) => (
