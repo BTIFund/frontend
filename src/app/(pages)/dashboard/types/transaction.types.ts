@@ -1,8 +1,15 @@
 export interface Transaction {
-    id: number;
-    type: "Investment" | "Return";
-    project: string;
-    amount: string;
-    date: string;
-    status: string;
+  projectId: bigint;
+  transactionType: string;
+  amount: bigint;
+  timestamp: bigint;
+}
+
+export interface TransactionDisplay {
+  id: number;
+  type: string;
+  project: string;
+  amount: number;
+  date: string;
+  status: string;
 }

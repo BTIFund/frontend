@@ -1,5 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Project {
+  id: bigint;
+  name: string;
+  image: string;
+  capacity: string;
+  invested: bigint;
+  returns: bigint;
+  status: string;
+  nextPayout: string;
+}
+
+export interface ProjectDisplay {
   id: number;
   name: string;
   location: string;

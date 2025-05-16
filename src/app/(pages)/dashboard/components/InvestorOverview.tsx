@@ -4,17 +4,18 @@ import StatsGrid from "./StatsGrid";
 import PerformanceChart from "./PerformanceChart";
 import ProjectsTable from "./ProjectsTable";
 import TransactionsTable from "./TransactionsTable";
+import { TransactionDisplay } from "../types/transaction.types";
 
 interface InvestorOverviewProps {
-  stats: any;
+  totalInvestment: any;
   projects: any[];
-  transactions: any[];
+  transactions: TransactionDisplay[];
 }
 
-export default function InvestorOverview({ stats, projects, transactions }: InvestorOverviewProps) {
+export default function InvestorOverview({ totalInvestment, projects, transactions }: InvestorOverviewProps) {
   return (
     <div className="space-y-8">
-      <StatsGrid stats={stats} />
+      <StatsGrid totalInvestment={totalInvestment} />
       <div className="bg-white rounded-lg shadow-sm">
         <div className="p-6">
           <h2 className="text-lg font-semibold mb-4">Portfolio Performance</h2>
