@@ -108,7 +108,7 @@ export default function PerformanceChart() {
     };
 
     fetchPerformanceData();
-  }, [address]);
+  }, [address, publicClient]);
 
   const options: ChartJsOptions<"line"> = {
     responsive: true,

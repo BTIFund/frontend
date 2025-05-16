@@ -7,7 +7,7 @@ export default function ContactHero() {
                 </h1>
                 <p className="text-xl text-gray-900/90 max-w-2xl mx-auto">
                     Have questions about solar energy investment or our blockchain
-                    technology? We're here to help.
+                    technology? We&#39;re here to help.
                 </p>
             </div>
         </div>

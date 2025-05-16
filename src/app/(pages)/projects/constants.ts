@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BTIProject1 from "../../../../public/img/bti-project-1.webp";
 import BTIProject2 from "../../../../public/img/bti-project-2.webp";
 import BTIProject3 from "../../../../public/img/bti-project-3.webp";
