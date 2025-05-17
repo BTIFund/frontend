@@ -32,6 +32,16 @@ export default function ProjectsView() {
     },
   });
 
+  const { data: isDeveloper } = useReadContract({
+    ...wagmiContractSolarConfig,
+    functionName: 'isDeveloper',
+    args: [address],
+    query: {
+      refetchInterval: 10000,
+      enabled: isConnected && !!address,
+    },
+  });
+
   const investedProjectIds = (investedProjectIdsRaw as bigint[]) || [];
 
   useEffect(() => {
@@ -75,25 +85,27 @@ export default function ProjectsView() {
       {/* Header and Create Button */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-900">Solar Projects</h2>
-        <button
-          className="cursor-pointer inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          onClick={() => setIsCreateModalOpen(true)}
-        >
-          <svg
-            className="w-5 h-5 mr-2"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {(isDeveloper === true) && 
+          <button
+            className="cursor-pointer inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            onClick={() => setIsCreateModalOpen(true)}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 4v16m8-8H4"
-            />
-          </svg>
-          Create Project
-        </button>
+            <svg
+              className="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+            Create Project
+          </button>
+        }
         <CreateProjectModal
           isOpen={isCreateModalOpen}
           onClose={() => setIsCreateModalOpen(false)}
