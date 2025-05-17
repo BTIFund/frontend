@@ -46,7 +46,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                   <div className="h-10 w-10 flex-shrink-0">
                     <Image
                       src={project.image}
-                      alt={project.name}
+                      alt={project.name || "img-project"}
                       width={40}
                       height={40}
                       className="rounded-lg"

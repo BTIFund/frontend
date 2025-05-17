@@ -5,9 +5,15 @@ import { Config, WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { XellarKitProvider, defaultConfig, darkTheme } from "@xellar/kit";
 import { liskSepolia } from "viem/chains";
+import { createPublicClient, http } from "viem";
 
-const walletConnectProjectId = "YOUR_WALLET_CONNECT_PROJECT_ID";
+const walletConnectProjectId = "306574a34ee588efaea770ec120a0060";
 const xellarAppId = "378510d2-ba41-4037-a562-86b24d668baf";
+
+export const publicClient = createPublicClient({
+  chain: liskSepolia,
+  transport: http(),
+});
 
 const config = defaultConfig({
   appName: "Xellar",

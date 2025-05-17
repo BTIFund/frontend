@@ -7,25 +7,46 @@ import ProjectModal from './components/ProjectModal';
 import { useReadContract, usePublicClient } from 'wagmi';
 import { wagmiContractSolarConfig } from '@/app/services/contract';
 import { readContract } from 'viem/actions';
+import { Address } from 'viem';
 
 export default function ProjectsPage() {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [projectDetails, setProjectDetails] = useState<any[]>([]);
   const [isFetchingDetails, setIsFetchingDetails] = useState(false);
+  const [idx, setIdx] = useState(null);
   const publicClient = usePublicClient();
 
-  const { data: allProjectIdsRaw, isLoading: isProjectIdsLoading } = useReadContract({
+  const {
+    data: allProjectIdsRaw,
+    isLoading: isProjectIdsLoading,
+    error: projectIdsError,
+  } = useReadContract({
     ...wagmiContractSolarConfig,
     functionName: 'getAllProjectIds',
-    query: { refetchInterval: 10000 },
+    query: { refetchInterval: 10000 }, // or remove this for stability
   });
 
-  const allProjectIds = allProjectIdsRaw as bigint[];
+  const allProjectIds = allProjectIdsRaw as bigint[] | undefined;
+
+  useEffect(() => {
+    console.log("[DEBUG] publicClient:", publicClient);
+    console.log("[DEBUG] allProjectIdsRaw:", allProjectIdsRaw);
+
+    if (projectIdsError) {
+      console.error("[ERROR] useReadContract getAllProjectIds failed:", projectIdsError);
+    }
+  }, [allProjectIdsRaw, projectIdsError, publicClient]);
 
   useEffect(() => {
     const fetchProjects = async () => {
-      if (!publicClient || !allProjectIds || allProjectIds.length === 0) {
+      if (!publicClient) {
+        console.warn("[WARN] publicClient is not ready yet");
+        return;
+      }
+
+      if (!allProjectIds || allProjectIds.length === 0) {
+        console.log("[INFO] No project IDs to fetch.");
         setProjectDetails([]);
         return;
       }
@@ -33,19 +54,24 @@ export default function ProjectsPage() {
       setIsFetchingDetails(true);
 
       try {
+        console.log("[DEBUG] Fetching details for project IDs:", allProjectIds);
+
         const detailPromises = allProjectIds.map((projectId) =>
           readContract(publicClient, {
-            address: wagmiContractSolarConfig.address,
+            address: wagmiContractSolarConfig.address as Address,
             abi: wagmiContractSolarConfig.abi,
-            functionName: "getProjectDetails",
+            functionName: 'getProjectDetails',
             args: [projectId],
+          }).then((result) => {
+            console.log(`[DEBUG] Fetched details for project ${projectId}:`, result);
+            return result;
           })
         );
 
         const allDetails = await Promise.all(detailPromises);
         setProjectDetails(allDetails);
       } catch (err) {
-        console.error("Error fetching project details:", err);
+        console.error("[ERROR] Fetching project details failed:", err);
         setProjectDetails([]);
       } finally {
         setIsFetchingDetails(false);
@@ -55,8 +81,9 @@ export default function ProjectsPage() {
     fetchProjects();
   }, [allProjectIds, publicClient]);
 
-  const handleProjectClick = (project: any) => {
+  const handleProjectClick = (project: any, index: any) => {
     setSelectedProject(project);
+    setIdx(index);
     setIsModalOpen(true);
   };
 
@@ -75,7 +102,7 @@ export default function ProjectsPage() {
               <ProjectCard
                 key={index}
                 project={project}
-                onClick={() => handleProjectClick(project)}
+                onClick={() => handleProjectClick(project, index)}
               />
             ))}
           </div>
@@ -85,6 +112,7 @@ export default function ProjectsPage() {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           project={selectedProject}
+          id={idx}
         />
       </div>
     </main>

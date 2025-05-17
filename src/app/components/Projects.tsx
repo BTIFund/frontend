@@ -268,7 +268,7 @@ export default function ProjectsSection() {
                                         
                                         <motion.a
                                             href={`#${project.id}`}
-                                            className="block text-center bg-blue-900 hover:bg-blue-800 text-white font-semibold px-4 py-3 rounded-lg transition duration-300"
+                                            className="block cursor-pointer text-center bg-blue-900 hover:bg-blue-800 text-white font-semibold px-4 py-3 rounded-lg transition duration-300"
                                             whileHover={buttonHover}
                                             whileTap={{ scale: 0.98 }}
                                         >
