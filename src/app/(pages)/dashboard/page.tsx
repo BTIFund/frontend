@@ -12,6 +12,7 @@ import { readContract } from "viem/actions";
 import { Transaction } from "./types/transaction.types";
 import { mapTransactionsToDisplay } from "@/app/utils/utils";
 import { Project } from "./types/project.types";
+import { mockTransactions } from "./data/mockData";
 
 export default function Dashboard() {
   const { address } = useAccount();
@@ -152,7 +153,7 @@ export default function Dashboard() {
     () => mapTransactionsToDisplay(transactions || [], projects),
     [transactions, projects]
   );
-
+  
   const renderTabContent = () => {
     if (loading) {
       return <p className="text-center text-gray-600">Loading data...</p>;
@@ -174,7 +175,7 @@ export default function Dashboard() {
       case "projects":
         return <ProjectsView />;
       case "transactions":
-        return <TransactionsView transactions={transactionsDisplay ?? []} />;
+        return <TransactionsView transactions={transactionsDisplay.length === 0 ? mockTransactions : transactionsDisplay} />;
       default:
         return null;
     }

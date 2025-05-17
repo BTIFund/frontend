@@ -9,7 +9,7 @@ export interface TransactionDisplay {
   id: number;
   type: string;
   project: string;
-  amount: number;
+  amount: string;
   date: string;
   status: string;
 }
