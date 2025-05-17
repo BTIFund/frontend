@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { X } from "lucide-react";
-import { useAccount, useWriteContract } from "wagmi";
+import { useWriteContract } from "wagmi";
 import { parseUnits } from "viem";
 import { wagmiContractSolarConfig } from "@/app/services/contract";
 
@@ -14,7 +14,6 @@ interface CreateProjectModalProps {
 
 export default function CreateProjectModal({ isOpen, onClose }: CreateProjectModalProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const { address } = useAccount();
   const [formData, setFormData] = useState({
     name: "",
     location: "",
@@ -25,44 +24,20 @@ export default function CreateProjectModal({ isOpen, onClose }: CreateProjectMod
 
   const { writeContractAsync } = useWriteContract();
 
-  // const executeContract = async (config: any) => {
-  //   try {
-  //     await writeContractAsync(config);
-  //   } catch (error: unknown) {
-  //     console.error(error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   };
-  // }
-
-
-  // const handleSubmit = () => {
-  //   setIsLoading(true)
-  //   if (!address) {
-  //     console.warn("Address is missing");
-  //     return;
-  //   }
-
-  //   executeContract({
-  //     ...wagmiContractSolarConfig,
-  //     functionName: "createProject",
-  //     args: [
-  //       formData.name,
-  //       formData.location,
-  //       parseUnits(formData.fundingGoal, 18),
-  //       parseUnits(formData.expectedMonthlyReturn, 2),
-  //       BigInt(Number(formData.fundingDurationDays)),
-  //     ],
-  //   });
-  // };
-
   const executeContract = async (config: any) => {
     try {
       console.log("[executeContract] Sending transaction with config:", config);
-      const tx = await writeContractAsync(config);
-      console.log("[executeContract] Transaction response:", tx);
-    } catch (error: unknown) {
-      console.error("[executeContract] Error:", error);
+      const txHash = await writeContractAsync(config);
+      console.log("[executeContract] Tx sent:", txHash);
+
+    } catch (error: any) {
+      console.error("[executeContract] Transaction failed:", error);
+      if (error?.shortMessage) {
+        alert("Transaction Error: " + error.shortMessage);
+      }
+      if (error?.cause?.message) {
+        alert("Detail: " + error.cause.message);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -72,12 +47,6 @@ export default function CreateProjectModal({ isOpen, onClose }: CreateProjectMod
     e.preventDefault();
 
     setIsLoading(true);
-
-    if (!address) {
-      console.warn("[handleSubmit] Address is missing");
-      setIsLoading(false);
-      return;
-    }
 
     console.log("[handleSubmit] Submitting project with formData:", formData);
 
@@ -92,6 +61,7 @@ export default function CreateProjectModal({ isOpen, onClose }: CreateProjectMod
         BigInt(Number(formData.fundingDurationDays)),
       ],
     });
+    onClose();
   };
 
 
