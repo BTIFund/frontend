@@ -4,18 +4,21 @@
 import { useEffect, useState } from 'react';
 import ProjectCard from './components/ProjectCard';
 import ProjectModal from './components/ProjectModal';
-import { useReadContract, usePublicClient } from 'wagmi';
+import { useReadContract, usePublicClient, useAccount } from 'wagmi';
 import { wagmiContractSolarConfig } from '@/app/services/contract';
 import { readContract } from 'viem/actions';
 import { Address } from 'viem';
+import CreateProjectModal from '../dashboard/components/CreateProjectModal';
 
 export default function ProjectsPage() {
+  const { address, isConnected } = useAccount();
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [projectDetails, setProjectDetails] = useState<any[]>([]);
   const [isFetchingDetails, setIsFetchingDetails] = useState(false);
   const [idx, setIdx] = useState(null);
   const publicClient = usePublicClient();
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const {
     data: allProjectIdsRaw,
@@ -28,6 +31,16 @@ export default function ProjectsPage() {
   });
 
   const allProjectIds = allProjectIdsRaw as bigint[] | undefined;
+
+  const { data: isDeveloper } = useReadContract({
+    ...wagmiContractSolarConfig,
+    functionName: 'isDeveloper',
+    args: [address],
+    query: {
+      refetchInterval: 10000,
+      enabled: isConnected && !!address,
+    },
+  });
 
   useEffect(() => {
     console.log("[DEBUG] publicClient:", publicClient);
@@ -90,7 +103,34 @@ export default function ProjectsPage() {
   return (
     <main className='bg-gray-100 min-h-screen text-gray-900'>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8 mt-4">Solar Projects</h1>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <h2 className="text-2xl font-bold text-gray-900">Solar Projects</h2>
+          {(isDeveloper === true) &&
+            <button
+              className="cursor-pointer inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              onClick={() => setIsCreateModalOpen(true)}
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Create Project
+            </button>
+          }
+          <CreateProjectModal
+            isOpen={isCreateModalOpen}
+            onClose={() => setIsCreateModalOpen(false)}
+          />
+        </div>
 
         {(isProjectIdsLoading || isFetchingDetails) ? (
           <div className="text-center text-lg">Loading projects...</div>

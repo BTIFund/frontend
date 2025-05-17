@@ -32,15 +32,15 @@ export default function ProjectsView() {
     },
   });
 
-  const { data: isDeveloper } = useReadContract({
-    ...wagmiContractSolarConfig,
-    functionName: 'isDeveloper',
-    args: [address],
-    query: {
-      refetchInterval: 10000,
-      enabled: isConnected && !!address,
-    },
-  });
+  // const { data: isDeveloper } = useReadContract({
+  //   ...wagmiContractSolarConfig,
+  //   functionName: 'isDeveloper',
+  //   args: [address],
+  //   query: {
+  //     refetchInterval: 10000,
+  //     enabled: isConnected && !!address,
+  //   },
+  // });
 
   const investedProjectIds = (investedProjectIdsRaw as bigint[]) || [];
 
@@ -85,7 +85,7 @@ export default function ProjectsView() {
       {/* Header and Create Button */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-900">Solar Projects</h2>
-        {(isDeveloper === true) && 
+        {/* {(isDeveloper === true) && 
           <button
             className="cursor-pointer inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             onClick={() => setIsCreateModalOpen(true)}
@@ -105,7 +105,7 @@ export default function ProjectsView() {
             </svg>
             Create Project
           </button>
-        }
+        } */}
         <CreateProjectModal
           isOpen={isCreateModalOpen}
           onClose={() => setIsCreateModalOpen(false)}
