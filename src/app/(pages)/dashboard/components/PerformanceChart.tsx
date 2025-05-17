@@ -12,13 +12,12 @@ import {
   Tooltip,
   Legend,
   ChartData,
-  ChartOptions as ChartJsOptions
+  ChartOptions as ChartJsOptions,
 } from "chart.js";
 import { useState, useEffect } from "react";
 import { useAccount, usePublicClient } from "wagmi";
 import { readContract } from "viem/actions";
 import { wagmiContractSolarConfig } from "@/app/services/contract";
-;
 
 ChartJS.register(
   CategoryScale,
@@ -33,6 +32,7 @@ ChartJS.register(
 export default function PerformanceChart() {
   const { address } = useAccount();
   const publicClient = usePublicClient();
+
   const [chartData, setChartData] = useState<ChartData<"line">>({
     labels: [],
     datasets: [],
@@ -42,35 +42,35 @@ export default function PerformanceChart() {
     const fetchPerformanceData = async () => {
       if (!address || !publicClient) return;
 
-      const currentYear = new Date().getFullYear();
-      const currentMonth = new Date().getMonth() + 1; // 1-indexed
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear();
+      const currentMonth = currentDate.getMonth() + 1;
 
       const monthLabels = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
       ];
 
-      const labels: string[] = monthLabels.slice(0, currentMonth);
+      const labels = monthLabels.slice(0, currentMonth);
       const investments: number[] = [];
       const returns: number[] = [];
 
-      for (let i = 1; i <= currentMonth; i++) {
+      for (let month = 1; month <= currentMonth; month++) {
         try {
-
           const result: any = await readContract(publicClient, {
             ...wagmiContractSolarConfig,
             functionName: "getUserPortfolioPerformance",
-            args: [address, currentYear, i],
+            args: [address, currentYear, month],
           });
 
-          const investment = parseInt(result.totalInvestment.toString());
-          const returnAmount = parseInt(result.totalReturns.toString());
+          const investment = result?.totalInvestment ? Number(result.totalInvestment) : 0;
+          const returnAmount = result?.totalReturns ? Number(result.totalReturns) : 0;
           const returnPercentage = investment > 0 ? (returnAmount / investment) * 100 : 0;
 
           investments.push(investment);
           returns.push(returnPercentage);
         } catch (err) {
-          console.error(`Error fetching data for month ${i}:`, err);
+          console.error(`Error fetching data for month ${month}:`, err);
           investments.push(0);
           returns.push(0);
         }
@@ -139,7 +139,7 @@ export default function PerformanceChart() {
             const label = context.dataset.label || "";
 
             if (label.includes("Investment")) {
-              return `${label}: IDR ${(value / 1000000).toFixed(1)}M`;
+              return `${label}: IDR ${(value / 1_000_000).toFixed(1)}M`;
             }
             return `${label}: ${value.toFixed(1)}%`;
           },
@@ -157,10 +157,10 @@ export default function PerformanceChart() {
         },
         ticks: {
           callback: (value) =>
-            `IDR ${((value as number) / 1000000).toFixed(0)}M`,
+            `IDR ${((value as number) / 1_000_000).toFixed(0)}M`,
         },
         min: 0,
-        max: 250000000,
+        max: 250_000_000,
       },
       y2: {
         type: "linear",

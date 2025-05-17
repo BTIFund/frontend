@@ -24,7 +24,7 @@ export default function ProjectsPage() {
   } = useReadContract({
     ...wagmiContractSolarConfig,
     functionName: 'getAllProjectIds',
-    query: { refetchInterval: 10000 }, // or remove this for stability
+    query: { refetchInterval: 10000 },
   });
 
   const allProjectIds = allProjectIdsRaw as bigint[] | undefined;

@@ -2,42 +2,48 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAccount, usePublicClient, useReadContract } from "wagmi";
+import { readContract } from "viem/actions";
 import CreateProjectModal from "./CreateProjectModal";
-import { wagmiContractSolarConfig } from "@/app/services/contract";
-import { usePublicClient, useReadContract } from "wagmi";
-import { readContract } from 'viem/actions';
 import ProjectCard from "../../projects/components/ProjectCard";
 import ProjectModal from "../../projects/components/ProjectModal";
-
+import { wagmiContractSolarConfig } from "@/app/services/contract";
 
 export default function ProjectsView() {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const { address, isConnected } = useAccount();
+  const publicClient = usePublicClient();
+
+  const [selectedProject, setSelectedProject] = useState<any>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [projectDetails, setProjectDetails] = useState<any[]>([]);
   const [isFetchingDetails, setIsFetchingDetails] = useState(false);
-  const publicClient = usePublicClient();
 
-
-  const { data: allProjectIdsRaw, isLoading: isProjectIdsLoading } = useReadContract({
+  const {
+    data: investedProjectIdsRaw,
+    isLoading: isProjectIdsLoading,
+  } = useReadContract({
     ...wagmiContractSolarConfig,
-    functionName: 'getInvestedProjectIds',
-    query: { refetchInterval: 10000 },
+    functionName: "getInvestedProjectIds",
+    args: [address],
+    query: {
+      refetchInterval: 10000,
+      enabled: isConnected && !!address,
+    },
   });
 
-  const allProjectIds = allProjectIdsRaw as bigint[];
+  const investedProjectIds = (investedProjectIdsRaw as bigint[]) || [];
 
   useEffect(() => {
     const fetchProjects = async () => {
-      if (!publicClient || !allProjectIds || allProjectIds.length === 0) {
+      if (!publicClient || investedProjectIds.length === 0) {
         setProjectDetails([]);
         return;
       }
 
       setIsFetchingDetails(true);
-
       try {
-        const detailPromises = allProjectIds.map((projectId) =>
+        const detailPromises = investedProjectIds.map((projectId) =>
           readContract(publicClient, {
             address: wagmiContractSolarConfig.address,
             abi: wagmiContractSolarConfig.abi,
@@ -57,7 +63,7 @@ export default function ProjectsView() {
     };
 
     fetchProjects();
-  }, [allProjectIds, publicClient]);
+  }, [publicClient, investedProjectIds]);
 
   const handleProjectClick = (project: any) => {
     setSelectedProject(project);
@@ -66,7 +72,7 @@ export default function ProjectsView() {
 
   return (
     <div className="space-y-6">
-      {/* Header and Filters */}
+      {/* Header and Create Button */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-900">Solar Projects</h2>
         <button
@@ -94,8 +100,8 @@ export default function ProjectsView() {
         />
       </div>
 
-      {/* Projects Grid */}
-      {(isProjectIdsLoading || isFetchingDetails) ? (
+      {/* Project Grid */}
+      {isProjectIdsLoading || isFetchingDetails ? (
         <div className="text-center text-lg">Loading projects...</div>
       ) : projectDetails.length === 0 ? (
         <div className="p-11 text-center text-gray-500">No projects found.</div>
@@ -111,6 +117,7 @@ export default function ProjectsView() {
         </div>
       )}
 
+      {/* Detail Modal */}
       <ProjectModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
